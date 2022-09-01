@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<head>
+<title>Livraria</title>
+<meta charset="utf-8" />
+</head>
+
+<body>
+<h:messages />
+<h:dataTable value="#{adminListBooksBean.books}" var="book">
+	<h:column>
+		<f:facet name="header">Titulo</f:facet>
+        #{book.title}
+    </h:column>
+   	<h:column>
+		<f:facet name="header">Número de Páginas</f:facet>
+        #{book.numberOfPages}
+    </h:column>
+	<h:column>
+		<f:facet name="header">Autores</f:facet>
+			<ui:repeat value="#{book.authors}" var="author">
+            	#{author.name}
+                </ui:repeat>
+	</h:column>
+</h:dataTable>
+</body>
+
+</html>
