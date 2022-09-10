@@ -47,7 +47,6 @@ public class AdminBookBean {
 
 	@Transactional
 	public String save() {
-		this.populate();
 		dao.save(product);
 		LOGGER.info("Novo produto salvo {}", this.product);
 		helper.addFlashMessage("Livro Salvo com SUCESSO!");
@@ -55,6 +54,7 @@ public class AdminBookBean {
 		return "/produtos/list?faces-redirect=true";
 	}
 
+	@Deprecated
 	public void populate() {
 		this.authors.stream().filter(author -> selectedIds.contains(author.getId())).collect(Collectors.toList())
 				.forEach(product.getAuthors()::add);

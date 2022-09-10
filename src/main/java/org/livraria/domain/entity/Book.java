@@ -2,7 +2,7 @@ package org.livraria.domain.entity;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -15,7 +15,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Future;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -27,6 +26,7 @@ import org.hibernate.validator.constraints.Length;
 public class Book {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "SQ_BOOK")
 	private Long id;
 	
 	@NotBlank
@@ -42,23 +42,22 @@ public class Book {
 	@Column(name = "PAGES")
 	private Integer numberOfPages;
 	
-	@DecimalMin("20")
+	@DecimalMin("0")
 	@Column(name = "PRICE")
 	private BigDecimal price;
 
 	@Size(min = 1)
 	@ManyToMany(fetch = FetchType.EAGER )
-	@JoinTable(name = "book_author", 
-			joinColumns = @JoinColumn(name = "book_id"), 
-			inverseJoinColumns = @JoinColumn(name = "author_id")
+	@JoinTable(name = "Book_Author", 
+			joinColumns = @JoinColumn(name = "SQ_BOOK"), 
+			inverseJoinColumns = @JoinColumn(name = "AUTHOR_ID")
 			)
 	private List<Author> authors = new ArrayList<>();
 
-	@Column(name = "RELEASE")
+	@Column(name = "RELEASEDATE")
 	@NotNull
-	@Future
-	private Date releaseDate;
-	
+	private Calendar releaseDate;
+
 	public Long getId() {
 		return id;
 	}
@@ -107,20 +106,12 @@ public class Book {
 		this.authors = authors;
 	}
 
-	@Override
-	public String toString() {
-		return "Book [id=" + id + ", title=" + title + ", description=" + description + ", numberOfPages="
-				+ numberOfPages + ", price=" + price + ", authors=" + authors + "]";
-	}
-
-	public Date getReleaseDate() {
+	public Calendar getReleaseDate() {
 		return releaseDate;
-		
 	}
 
-	public void setReleaseDate(Date releaseDate) {
+	public void setReleaseDate(Calendar releaseDate) {
 		this.releaseDate = releaseDate;
-		
 	}
 
 }

@@ -10,6 +10,7 @@ import javax.persistence.Id;
 public class Author {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "AUTHOR_ID")
 	private Long id;
 
 	@Column(name = "NAME")
