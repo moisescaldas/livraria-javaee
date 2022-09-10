@@ -1,28 +1,51 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
 
 <head>
-	<title>Cadastro Livro</title>
-	<meta />
+<title>Cadastro Livro</title>
+<meta />
 </head>
 
 <h:body>
-	<h:messages />
 	<h:form>
-		<h:outputLabel value="Titulo" />
-		<h:inputText id="titulo" value="#{adminBookBean.product.title}" required="true" /><br />
-		<h:outputLabel value="Descricao" />
-		<h:inputTextarea id="descricao" cols="20" rows="10" value="#{adminBookBean.product.description}" required="true" /><br />
-		<h:outputLabel value="Paginas" />
-		<h:inputText id="paginas" value="#{adminBookBean.product.numberOfPages}" required="true" /><br />
-		<h:outputLabel value="valor" />
-		<h:inputText if="valor" value="#{adminBookBean.product.price}" required="true">
-			<f:validateDoubleRange minimum="10" maximo="100" />
-		</h:inputText><br />
-		<h:outputLabel value="Autores" />
-		<h:selectManyListbox id="autores" value="#{adminBookBean.selectedIds}" required="true">
-			<f:selectItems value="#{adminBookBean.authors}" var="author" itemLabel="#{author.name}" itemValue="#{author.id}" />
-		</h:selectManyListbox><br />
+		<div>
+			<h:outputLabel value="Titulo" />
+			<h:inputText id="titulo" value="#{adminBookBean.product.title}"
+				required="true" />
+			<h:message for="titulo" />
+		</div>
+		<div>
+			<h:outputLabel value="Descricao" />
+			<h:inputTextarea id="descricao" cols="20" rows="10"
+				value="#{adminBookBean.product.description}" required="true" />
+			<h:message for="descricao" />
+		</div>
+		<div>
+			<h:outputLabel value="Paginas" />
+			<h:inputText id="paginas"
+				value="#{adminBookBean.product.numberOfPages}" required="true" />
+			<h:message for="paginas" />
+		</div>
+		<div>
+			<h:outputLabel value="valor" />
+			<h:inputText if="valor" value="#{adminBookBean.product.price}"
+				required="true">
+				<f:validateDoubleRange minimum="10" maximo="100" />
+			</h:inputText>
+			<h:message for="valor" />
+		</div>
+		<div>
+			<h:outputLabel value="Autores" />
+			<h:selectManyListbox id="autores"
+				value="#{adminBookBean.selectedIds}" required="true">
+				<f:selectItems value="#{adminBookBean.authors}" var="author"
+					itemLabel="#{author.name}" itemValue="#{author.id}" />
+			</h:selectManyListbox>
+			<h:message for="autores" />
+		</div>
 		<h:commandButton action="#{adminBookBean.save}" value="Salvar" />
 	</h:form>
 </h:body>
