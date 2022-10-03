@@ -5,13 +5,36 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html">
 	<f:metadata>
-		<f:viewParam id="id" name="id" value="#{productDetailBean.id}"/>
-		<f:viewAction action="#{productDetailBean.loadBook()}" />
+		<f:viewParam id="id" name="id" value="#{bookDetailBean.id}"/>
+		<f:viewAction action="#{bookDetailBean.loadBook()}" />
 	</f:metadata>
 	<h:head>
-		<title>#{productDetailBean.book.title}</title>
+		<title>#{bookDetailBean.book.title}</title>
 	</h:head>
 	<h:body>
-	
+		<header>
+			<div ind="product-overview">
+				<img width="280px" height="395px"
+					src="#{bookDetailBean.book.coverUrl}"
+					title="#{bookDetailBean.book.title}"/>
+				<h1>
+					#{bookDetailBean.book.title}
+				</h1>
+				<p>
+					<ui:repeat var="author" value="#{bookDetailBean.book.authors}">
+						<span>#{author.name} </span>
+					</ui:repeat>
+				</p>
+				<p>
+					#{bookDetailBean.book.description}
+				</p>
+			</div>
+		</header>
+		<section>
+			<h2>Dados do Livro</h2>
+			<p>Número de Paginas: <span>#{bookDetailBean.book.numberOfPages}</span></p>
+			<p>Preço: <span>#{bookDetailBean.book.price}</span></p>
+			<p>Data de Publicação: <span>#{bookDetailBean.book.releaseDate.time}</span></p>
+		</section>		
 	</h:body>
 </html>
