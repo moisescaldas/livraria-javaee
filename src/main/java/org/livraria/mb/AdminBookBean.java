@@ -1,17 +1,18 @@
 package org.livraria.mb;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
+import javax.servlet.http.Part;
 import javax.transaction.Transactional;
 
 import org.livraria.domain.dao.AuthorDAO;
 import org.livraria.domain.dao.BookDAO;
 import org.livraria.domain.entity.Author;
 import org.livraria.domain.entity.Book;
+import org.livraria.util.FileSaver;
 import org.livraria.util.helper.MessageHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +25,8 @@ public class AdminBookBean {
 	private BookDAO dao;
 	private AuthorDAO authorDAO;
 	private MessageHelper helper;
+	private Part cover;
+	private FileSaver fileSaver;
 
 	private List<Author> authors;
 	private List<Long> selectedIds;
@@ -32,11 +35,12 @@ public class AdminBookBean {
 	}
 
 	@Inject
-	public AdminBookBean(Book product, BookDAO dao, AuthorDAO authorDAO, MessageHelper helper) {
+	public AdminBookBean(Book product, BookDAO dao, AuthorDAO authorDAO, MessageHelper helper, FileSaver fileSaver) {
 		this.product = product;
 		this.dao = dao;
 		this.authorDAO = authorDAO;
 		this.helper = helper;
+		this.fileSaver = fileSaver;
 	}
 
 	@PostConstruct
@@ -47,17 +51,13 @@ public class AdminBookBean {
 
 	@Transactional
 	public String save() {
+		product.setCoverUrl(fileSaver.write("capas", cover));
+		LOGGER.info("Capa salva no campinho {}", product.getCoverUrl());
 		dao.save(product);
 		LOGGER.info("Novo produto salvo {}", this.product);
 		helper.addFlashMessage("Livro Salvo com SUCESSO!");
 
 		return "/produtos/list?faces-redirect=true";
-	}
-
-	@Deprecated
-	public void populate() {
-		this.authors.stream().filter(author -> selectedIds.contains(author.getId())).collect(Collectors.toList())
-				.forEach(product.getAuthors()::add);
 	}
 
 	public void cleanObjects() {
@@ -82,5 +82,13 @@ public class AdminBookBean {
 
 	public List<Long> getSelectedIds() {
 		return this.selectedIds;
+	}
+
+	public Part getCover() {
+		return cover;
+	}
+
+	public void setCover(Part cover) {
+		this.cover = cover;
 	}
 }

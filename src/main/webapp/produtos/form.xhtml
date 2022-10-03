@@ -11,7 +11,7 @@
 </head>
 
 <h:body>
-	<h:form>
+	<h:form enctype="multipart/form-data">
 		<div>
 			<h:outputLabel value="Titulo" />
 			<h:inputText id="titulo" value="#{adminBookBean.product.title}"
@@ -50,6 +50,10 @@
 		<div>
 			<h:outputLabel value="Lançamento" />
 			<h:inputText value="#{adminBookBean.product.releaseDate}" pt:type="date" />
+		</div>
+		<div>
+			<h:outputLabel value="Capda do Livro" />
+			<h:inputFile id="cover" label="Capa do Livro" value="#{adminBookBean.cover}" />
 		</div>
 		<h:commandButton action="#{adminBookBean.save}" value="Salvar" />
 	</h:form>

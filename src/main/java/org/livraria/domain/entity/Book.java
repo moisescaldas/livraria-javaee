@@ -58,6 +58,11 @@ public class Book {
 	@NotNull
 	private Calendar releaseDate;
 
+	private String coverUrl;
+	
+	/*
+	 * Getters e Setters
+	 */
 	public Long getId() {
 		return id;
 	}
@@ -113,5 +118,12 @@ public class Book {
 	public void setReleaseDate(Calendar releaseDate) {
 		this.releaseDate = releaseDate;
 	}
-
+	
+	public String getCoverUrl() {
+		return coverUrl;
+	}
+	
+	public void setCoverUrl(String coverUrl) {
+		this.coverUrl = coverUrl;
+	}
 }
