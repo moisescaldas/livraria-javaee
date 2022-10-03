@@ -17,8 +17,6 @@ import org.livraria.util.factory.FileFactory;
 @RequestScoped
 public class FileSaver {
 
-	private HttpServletRequest request;
-
 	private static final String CONTENT_DISPOSITION = "content-disposition";
 	private static final String FILENAME_KEY = "filename=";
 	private static final String BUCKET_NAME = "livraria";
@@ -29,8 +27,7 @@ public class FileSaver {
 	}
 
 	@Inject
-	public FileSaver(HttpServletRequest request, AmazonS3 s3) {
-		this.request = request;
+	public FileSaver(AmazonS3 s3) {
 		this.s3 = s3;
 	}
 

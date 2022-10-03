@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 
 import org.livraria.domain.dao.BookDAO;
 import org.livraria.domain.entity.Book;
@@ -34,4 +35,9 @@ public class AdminListBooksBean {
 		return books;
 	}
 	
+	@Transactional
+	public void remover(Long id) {
+		System.out.println("Test" + id);
+		dao.removeById(id);
+	}
 }
