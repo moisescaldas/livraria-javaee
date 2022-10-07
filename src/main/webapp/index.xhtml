@@ -24,7 +24,7 @@
 		<ul>
 		<ui:repeat var="book" value="#{homeBean.olderBooks()}">
 			<li>
-				<a href="#">
+				<a href="#{request.contextPath}/site/product.xhtml?id=#{book.id}">
 					<img src="#{book.coverUrl}" width="143px" height="202px" title="#{book.title}" />
 				</a>
 				<h2>#{book.title}</h2>

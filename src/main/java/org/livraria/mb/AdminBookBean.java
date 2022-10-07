@@ -56,7 +56,8 @@ public class AdminBookBean {
 		dao.save(product);
 		LOGGER.info("Novo produto salvo {}", this.product);
 		helper.addFlashMessage("Livro Salvo com SUCESSO!");
-
+		cleanObjects();
+		
 		return "/produtos/list?faces-redirect=true";
 	}
 

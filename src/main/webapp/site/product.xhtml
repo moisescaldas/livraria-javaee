@@ -1,40 +1,60 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html">
-	<f:metadata>
-		<f:viewParam id="id" name="id" value="#{bookDetailBean.id}"/>
-		<f:viewAction action="#{bookDetailBean.loadBook()}" />
-	</f:metadata>
-	<h:head>
-		<title>#{bookDetailBean.book.title}</title>
-	</h:head>
-	<h:body>
-		<header>
-			<div ind="product-overview">
-				<img width="280px" height="395px"
-					src="#{bookDetailBean.book.coverUrl}"
-					title="#{bookDetailBean.book.title}"/>
-				<h1>
-					#{bookDetailBean.book.title}
-				</h1>
-				<p>
-					<ui:repeat var="author" value="#{bookDetailBean.book.authors}">
-						<span>#{author.name} </span>
-					</ui:repeat>
-				</p>
-				<p>
-					#{bookDetailBean.book.description}
-				</p>
-			</div>
-		</header>
-		<section>
-			<h2>Dados do Livro</h2>
-			<p>Número de Paginas: <span>#{bookDetailBean.book.numberOfPages}</span></p>
-			<p>Preço: <span>#{bookDetailBean.book.price}</span></p>
-			<p>Data de Publicação: <span>#{bookDetailBean.book.releaseDate.time}</span></p>
-		</section>		
-	</h:body>
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:jsf="http://xmlns.jcp.org/jsf">
+<f:metadata>
+	<f:viewParam id="id" name="id" value="#{bookDetailBean.id}" />
+	<f:viewAction action="#{bookDetailBean.loadBook()}" />
+</f:metadata>
+<h:head>
+	<title>#{bookDetailBean.book.title}</title>
+</h:head>
+<h:body>
+	<header>
+	<div ind="product-overview">
+		<img width="280px" height="395px"
+			src="#{bookDetailBean.book.coverUrl}"
+			title="#{bookDetailBean.book.title}" />
+		<h1>#{bookDetailBean.book.title}</h1>
+		<p>
+			<ui:repeat var="author" value="#{bookDetailBean.book.authors}">
+				<span>#{author.name} </span>
+			</ui:repeat>
+		</p>
+		<p>#{bookDetailBean.book.description}</p>
+	</div>
+	</header>
+	<section>
+	<h2>Dados do Livro</h2>
+	<p>
+		Número de Paginas: <span>#{bookDetailBean.book.numberOfPages}</span>
+	</p>
+	<p>
+		Preço: <span>#{bookDetailBean.book.price}</span>
+	</p>
+	<p>
+		Data de Publicação:
+		<h:outputText value="#{bookDetailBean.book.releaseDate.time}">
+			<f:convertDateTime pattern="dd/MM/yyyy" />
+		</h:outputText>
+	</p>
+	</section>
+	<form jsf:id="form" method="post" class="container">
+		<ul id="variants">
+			<li id="variants"><input type="radio"
+				id="product-variant-#{bookDetailBean.book.id}"
+				value="#{bookDetailBean.book.id}" checked="checked"></input> <label
+				for="product-variant-#{bookDetailBean.book.id}">E-Book +
+					Impresso</label> <small>R$ #{bookDetailBean.book.price}</small>
+				<p>R$ #{bookDetailBean.book.price}</p></li>
+		</ul>
+		<button type="submit"
+			jsf:action="#{shoppingCartBean.add(bookDetailBean.id)}"
+			class="submit-image icon-basket-alt"
+			title="#{productDetailBean.book.title}">Comprar</button>
+	</form>
+</h:body>
 </html>

@@ -4,12 +4,20 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import org.livraria.domain.entity.Book;
 
 public class BookDAO {
 	@PersistenceContext
 	private EntityManager manager;
+
+	public Book findBookById(Long id) {
+		TypedQuery<Book> query = manager.createQuery("select b from Book b where b.id = :id", Book.class);
+		query.setParameter("id", id);
+
+		return query.getSingleResult();
+	}
 
 	public void save(Book book) {
 		manager.persist(book);
@@ -25,10 +33,10 @@ public class BookDAO {
 	}
 
 	public List<Book> olderBooks() {
-		return manager.createQuery("select b from Book b where b.releaseDate <= now()", Book.class)
-				.setMaxResults(20).getResultList();
+		return manager.createQuery("select b from Book b where b.releaseDate <= now()", Book.class).setMaxResults(20)
+				.getResultList();
 	}
-	
+
 	public void removeById(Long id) {
 		Book book = findById(id);
 
@@ -40,7 +48,8 @@ public class BookDAO {
 	}
 
 	public Book findById(Long id) {
-		return manager.find(Book.class, id);
+		TypedQuery<Book> query = manager.createQuery("select b from Book b where b.id = :id", Book.class);
+		return query.setParameter("id", id).getSingleResult();
 	}
 
 }

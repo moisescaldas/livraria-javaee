@@ -1,9 +1,7 @@
 package org.livraria.mb;
 
-import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 
 import org.livraria.domain.dao.BookDAO;
 import org.livraria.domain.entity.Book;
@@ -14,20 +12,12 @@ public class BookDetailBean {
 	private BookDAO dao;
 	private Book book;
 	private Long id;
-	private HttpServletRequest request;
 	
 	public BookDetailBean() {}
 	
 	@Inject
-	public BookDetailBean(BookDAO dao, HttpServletRequest request) {
+	public BookDetailBean(BookDAO dao) {
 		this.dao = dao;
-		this.request = request;
-	}
-	
-	@PostConstruct
-	public void loadObjects() {
-		System.out.print("test");
-		System.out.println(request.getParameter("id"));
 	}
 	
 	public void loadBook() {
