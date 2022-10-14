@@ -26,12 +26,15 @@
 			</tbody>
 			<tbody>
 				<tr>
-					<td colspan="3"><input type="submit" id="checkout" value="Finalizar Compra" /></td>
-					<td><input type="submit" id="refreash" value=""/></td>
+					<td colspan="3"><a
+						href="${request.contextPath}/site/checkout.xhtml" id="checkout"
+						class="checkout">Finalizar compra </a></td>
+					<td><input type="submit" id="refreash" value="" /></td>
 					<td>R$ #{shoppingCart.getTotal()}</td>
 				</tr>
 			</tbody>
 		</table>
 	</form>
 </h:body>
+
 </html>

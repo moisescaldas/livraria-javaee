@@ -6,9 +6,8 @@
 		transaction-type="JTA">
 		<description>Dev persistence unit</description>
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<jta-data-source>java:/mysql/livraria</jta-data-source>
+		<jta-data-source>java:jboss/mysql/livraria</jta-data-source>
 		<properties>
-			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="false" />
 			<property name="hibernate.dialect"

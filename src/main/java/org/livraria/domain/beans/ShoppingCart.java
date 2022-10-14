@@ -27,7 +27,7 @@ public class ShoppingCart implements Serializable {
 
 	public Integer getQuantity(ShoppingItem item) {
 		if (!items.containsKey(item)) {
-			return 0;
+			items.put(item, 0);
 		}
 
 		return items.get(item);
@@ -48,7 +48,9 @@ public class ShoppingCart implements Serializable {
 	public BigDecimal getTotal() {
 		BigDecimal total = BigDecimal.ZERO;
 
-		items.keySet().stream().map(item -> item.getTotal(getQuantity(item))).forEach(total::add);
+		for (ShoppingItem item: items.keySet()) {
+			total = total.add(item.getTotal(getQuantity(item)));
+		}
 		
 		return total;
 	}
@@ -60,4 +62,5 @@ public class ShoppingCart implements Serializable {
 	public Boolean isEmpty() {
 		return items.isEmpty();
 	}
+	
 }
