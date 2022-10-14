@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 public class J2eeDBMigration {
 	private final Logger log = LoggerFactory.getLogger(J2eeDBMigration.class);
 
-	@Resource(lookup = "java:jboss/mysql/livraria")
+	@Resource(mappedName = "java:jboss/mysql/livraria")
 	DataSource dataSource;
 	
 	@PostConstruct

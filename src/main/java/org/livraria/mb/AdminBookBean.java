@@ -1,5 +1,6 @@
 package org.livraria.mb;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -41,6 +42,7 @@ public class AdminBookBean {
 		this.authorDAO = authorDAO;
 		this.helper = helper;
 		this.fileSaver = fileSaver;
+		this.selectedIds = new ArrayList<Long>(); 
 	}
 
 	@PostConstruct
