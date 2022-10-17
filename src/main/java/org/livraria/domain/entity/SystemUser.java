@@ -6,12 +6,9 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
@@ -20,18 +17,14 @@ import javax.validation.constraints.NotBlank;
 @Entity
 @Table(name = "SystemUsers")
 public class SystemUser {
-	
-	public SystemUser() {
-		this.addresses = new ArrayList<Address>();
-	}
-	
+
 	@Id
 	@Column(name = "ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@NotBlank
 	@Email
-	@Column(name = "EMAIl")
+	@Column(name = "EMAIl", unique = true)
 	private String email;
 	@NotBlank
 	@Column(name = "FIRST_NAME")
@@ -40,15 +33,17 @@ public class SystemUser {
 	@Column(name = "LAST_NAME")
 	private String lastName;
 	@NotBlank
-	@Column(name = "SOCIAL_ID")
+	@Column(name = "SOCIAL_ID", unique = true)
 	private String socialId;
 	@Column(name = "USER_PASSWORD")
 	private String password;
 
-	@OneToMany(targetEntity = Address.class, cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-	@JoinTable(name = "Addresses", joinColumns = { @JoinColumn(name = "ID_SystemUser") }, inverseJoinColumns = {
-			@JoinColumn(name = "ID") })
+	@OneToMany(targetEntity = Address.class, cascade = CascadeType.PERSIST, mappedBy = "systemUser")
 	private List<Address> addresses;
+
+	public SystemUser() {
+		this.addresses = new ArrayList<>();
+	}
 
 	/*
 	 * Getters and Setters
@@ -100,8 +95,22 @@ public class SystemUser {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 	public List<Address> getAddresses() {
 		return addresses;
 	}
+
+	public void setAddresses(List<Address> addresses) {
+		this.addresses = addresses;
+	}
+
+	@Override
+	public String toString() {
+		return "SystemUser [" + (id != null ? "id=" + id + ", " : "") + (email != null ? "email=" + email + ", " : "")
+				+ (name != null ? "name=" + name + ", " : "") + (lastName != null ? "lastName=" + lastName + ", " : "")
+				+ (socialId != null ? "socialId=" + socialId + ", " : "")
+				+ (password != null ? "password=" + password + ", " : "")
+				+ (addresses != null ? "addresses=" + addresses : "") + "]";
+	}
+
 }

@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+<h:head>
+	<title>Finalizar Compra</title>
+	<meta charset="UTF-8" />
+</h:head>
+<h:body>
+	<form accept-charset="UTF-8" jsf:id="checkoutUserForm" method="post">
+		<div>
+			<label for="name">Nome</label> <input type="text"
+				jsf:value="#{checkoutBean.systemUser.name}" jsf:id="firstName" />
+		</div>
+
+		<div>
+			<label for="lastName">Sobrenome</label> <input type="text"
+				jsf:value="#{checkoutBean.systemUser.lastName}" jsf:id="lastName" />
+		</div>
+
+		<div>
+			<label for="email">E-Mail</label> <input type="text"
+				jsf:value="#{checkoutBean.systemUser.email}" jsf:id="mail" />
+		</div>
+
+		<div>
+			<label for="socialId">CPF</label> <input type="text"
+				jsf:value="#{checkoutBean.systemUser.socialId}" jsf:id="socialId" />
+		</div>
+
+		<div class="address_field">
+			<h5>Endereço</h5>
+
+			<div>
+				<label for="address_country">País</label> <select size="1"
+					jsf:id="countryPick" jsf:value="#{checkoutBean.selectedCountryId}">
+					<f:selectItem itemValue="" itemLabel="Escolha o País" />
+					<f:selectItems value="#{checkoutBean.countries}" var="country"
+						itemValue="#{country.id}"
+						itemLabel="#{country.iso} - #{country.name}" />
+				</select>
+			</div>
+
+			<div>
+				<label for="address_state">Estado</label> <input type="text"
+					jsf:value="#{checkoutBean.address.state}" jsf:id="state" />
+			</div>
+
+			<div>
+				<label for="address_city">Cidade</label> <input type="text"
+					jsf:value="#{checkoutBean.address.city}" jsf:id="city" />
+			</div>
+
+			<div>
+				<label for="address_desc">Complemento</label> <input type="text"
+					jsf:value="#{checkoutBean.address.addressDesc}" jsf:id="address" />
+			</div>
+
+			<div>
+				<label for="address_ZIPCODE">CEP</label> <input type="text"
+					jsf:value="#{checkoutBean.address.zipCode}" jsf:id="zipcode" />
+			</div>
+
+			<div>
+				<label for="address_phone">Telefone</label> <input type="text"
+					jsf:value="#{checkoutBean.address.phone}" jsf:id="phone" />
+			</div>
+		</div>
+
+		<input type="submit" jsf:action="#{checkoutBean.checkout()}"
+			jsf:value="Continuar" />
+	</form>
+</h:body>
+</html>

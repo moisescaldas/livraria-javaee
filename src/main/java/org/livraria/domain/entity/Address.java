@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
@@ -33,7 +34,12 @@ public class Address {
 	private String phone;
 	
 	@ManyToOne(targetEntity = Country.class)
+	@JoinColumn(name = "ID_COUNTRY")
 	private Country country;
+	
+	@ManyToOne(targetEntity = SystemUser.class)
+	@JoinColumn(name = "ID_SystemUser")
+	private SystemUser systemUser;
 
 	/*
 	 * Getters and Setters
@@ -92,5 +98,23 @@ public class Address {
 
 	public void setCountry(Country country) {
 		this.country = country;
-	}	
+	}
+	
+	public SystemUser getSystemUser() {
+		return systemUser;
+	}
+	
+	public void setSystemUser(SystemUser systemUser) {
+		this.systemUser = systemUser;
+	}
+
+	@Override
+	public String toString() {
+		return "Address [" + (id != null ? "id=" + id + ", " : "")
+				+ (addressDesc != null ? "addressDesc=" + addressDesc + ", " : "")
+				+ (city != null ? "city=" + city + ", " : "") + (state != null ? "state=" + state + ", " : "")
+				+ (zipCode != null ? "zipCode=" + zipCode + ", " : "") + (phone != null ? "phone=" + phone + ", " : "")
+				+ (country != null ? "country=" + country : "") + "]";
+	}
+	
 }

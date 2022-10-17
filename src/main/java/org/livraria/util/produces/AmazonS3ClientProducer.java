@@ -1,5 +1,6 @@
 package org.livraria.util.produces;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
 
@@ -12,6 +13,7 @@ import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 
+@ApplicationScoped
 public class AmazonS3ClientProducer {
 
 	private static final String ACCESS_KEY = "AKIAIOSFODNN7EXAMPLE";

@@ -5,7 +5,6 @@ import java.io.IOException;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 
 import com.amazonaws.services.s3.AmazonS3;
@@ -30,26 +29,9 @@ public class FileSaver {
 	public FileSaver(AmazonS3 s3) {
 		this.s3 = s3;
 	}
-
-	/*
-	 * public String write(String baseFolder, Part multipartFile) { 
-	 * String serverPath = request.getServletContext().getRealPath("/" + baseFolder);
-	 * String fileName =
-	 * extractFilename(multipartFile.getHeader(CONTENT_DISPOSITION)); 
-	 * String path = serverPath + "/" + fileName;
-	 * 
-	 * try { 
-	 * multipartFile.write(path);
-	 * 
-	 * } catch (IOException e) { throw new RuntimeException(e); }
-	 * 
-	 * return baseFolder + "/" + fileName; }
-	 */
 	
 	public String write(String baseFolder, Part multipartFile) {
 		String fileName = extractFilename(multipartFile.getHeader(CONTENT_DISPOSITION));
-		//String serverPath = request.getServletContext().getRealPath("/" + baseFolder);
-		//String path = serverPath + "/" + fileName;
 		
 		try {
 			File file = FileFactory.getTempFile(multipartFile.getInputStream());
