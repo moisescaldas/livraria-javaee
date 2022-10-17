@@ -13,10 +13,14 @@ public class MessageHelper {
 	@Inject
 	public MessageHelper(FacesContext facesContext) {
 		this.facesContext = facesContext;
+		this.facesContext.getExternalContext().getFlash().setKeepMessages(true);
 	}
 	
 	public void addFlashMessage(String message) {
-		facesContext.getExternalContext().getFlash().setKeepMessages(true);
 		facesContext.addMessage(null, new FacesMessage(message));
+	}
+	
+	public void addMessageErro(String clientId, String message) {
+		facesContext.addMessage(clientId, new FacesMessage(message));
 	}
 }

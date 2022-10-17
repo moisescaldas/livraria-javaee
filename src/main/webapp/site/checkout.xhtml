@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -15,21 +15,25 @@
 		<div>
 			<label for="name">Nome</label> <input type="text"
 				jsf:value="#{checkoutBean.systemUser.name}" jsf:id="firstName" />
+			<h:message for="firstName" />
 		</div>
 
 		<div>
 			<label for="lastName">Sobrenome</label> <input type="text"
 				jsf:value="#{checkoutBean.systemUser.lastName}" jsf:id="lastName" />
+			<h:message for="lastName" />
 		</div>
 
 		<div>
 			<label for="email">E-Mail</label> <input type="text"
 				jsf:value="#{checkoutBean.systemUser.email}" jsf:id="mail" />
+			<h:message for="mail" />
 		</div>
 
 		<div>
 			<label for="socialId">CPF</label> <input type="text"
 				jsf:value="#{checkoutBean.systemUser.socialId}" jsf:id="socialId" />
+			<h:message for="socialId" />
 		</div>
 
 		<div class="address_field">
@@ -43,31 +47,37 @@
 						itemValue="#{country.id}"
 						itemLabel="#{country.iso} - #{country.name}" />
 				</select>
+				<h:message for="countryPick" />
 			</div>
 
 			<div>
 				<label for="address_state">Estado</label> <input type="text"
 					jsf:value="#{checkoutBean.address.state}" jsf:id="state" />
+				<h:message for="state" />
 			</div>
 
 			<div>
 				<label for="address_city">Cidade</label> <input type="text"
 					jsf:value="#{checkoutBean.address.city}" jsf:id="city" />
+				<h:message for="city" />
 			</div>
 
 			<div>
 				<label for="address_desc">Complemento</label> <input type="text"
 					jsf:value="#{checkoutBean.address.addressDesc}" jsf:id="address" />
+				<h:message for="address" />
 			</div>
 
 			<div>
 				<label for="address_ZIPCODE">CEP</label> <input type="text"
 					jsf:value="#{checkoutBean.address.zipCode}" jsf:id="zipcode" />
+				<h:message for="zipcode" />
 			</div>
 
 			<div>
 				<label for="address_phone">Telefone</label> <input type="text"
 					jsf:value="#{checkoutBean.address.phone}" jsf:id="phone" />
+				<h:message for="phone" />				
 			</div>
 		</div>
 
