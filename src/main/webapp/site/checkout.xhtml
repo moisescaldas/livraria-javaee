@@ -4,7 +4,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:jsf="http://xmlns.jcp.org/jsf">
+	xmlns:jsf="http://xmlns.jcp.org/jsf" xmlns:o="http://omnifaces.org/ui">
 
 <h:head>
 	<title>Finalizar Compra</title>
@@ -14,26 +14,43 @@
 	<form accept-charset="UTF-8" jsf:id="checkoutUserForm" method="post">
 		<div>
 			<label for="name">Nome</label> <input type="text"
-				jsf:value="#{checkoutBean.systemUser.name}" jsf:id="firstName" />
-			<h:message for="firstName" />
+				jsf:value="#{checkoutBean.systemUser.name}" jsf:id="firstName">
+			<f:validateBean
+				validationGroups="org.livraria.domain.validation.groups.BuyerGroup" />
+			</input>
+			<o:messages for="checkoutUserForm:firstName" var="message">
+				<p>#{message.summary}</p>
+			</o:messages>
 		</div>
 
 		<div>
 			<label for="lastName">Sobrenome</label> <input type="text"
-				jsf:value="#{checkoutBean.systemUser.lastName}" jsf:id="lastName" />
-			<h:message for="lastName" />
+				jsf:value="#{checkoutBean.systemUser.lastName}" jsf:id="lastName">
+			<f:validateBean
+				validationGroups="org.livraria.domain.validation.groups.BuyerGroup" />
+			</input>
+			<o:messages for="checkoutUserForm:lastName" var="message">
+				<p>#{message.summary}</p>
+			</o:messages>
 		</div>
 
 		<div>
 			<label for="email">E-Mail</label> <input type="text"
 				jsf:value="#{checkoutBean.systemUser.email}" jsf:id="mail" />
-			<h:message for="mail" />
+			<o:messages for="checkoutUserForm:mail" var="message">
+				<p>#{message.summary}</p>
+			</o:messages>
 		</div>
 
 		<div>
 			<label for="socialId">CPF</label> <input type="text"
-				jsf:value="#{checkoutBean.systemUser.socialId}" jsf:id="socialId" />
-			<h:message for="socialId" />
+				jsf:value="#{checkoutBean.systemUser.socialId}" jsf:id="socialId">
+			<f:validateBean
+				validationGroups="org.livraria.domain.validation.groups.BuyerGroup" />
+			</input>
+			<o:messages for="checkoutUserForm:socialId" var="message">
+				<p>#{message.summary}</p>
+			</o:messages>
 		</div>
 
 		<div class="address_field">
@@ -42,42 +59,54 @@
 			<div>
 				<label for="address_country">País</label> <select size="1"
 					jsf:id="countryPick" jsf:value="#{checkoutBean.selectedCountryId}">
-					<f:selectItem itemValue="" itemLabel="Escolha o País" />
+					<f:selectItem itemValue="0" itemLabel="Escolha o País" />
 					<f:selectItems value="#{checkoutBean.countries}" var="country"
 						itemValue="#{country.id}"
 						itemLabel="#{country.iso} - #{country.name}" />
 				</select>
-				<h:message for="countryPick" />
+				<o:messages for="checkoutUserForm:countryPick" var="message">
+					<p>#{message.summary}</p>
+				</o:messages>
 			</div>
 
 			<div>
 				<label for="address_state">Estado</label> <input type="text"
 					jsf:value="#{checkoutBean.address.state}" jsf:id="state" />
-				<h:message for="state" />
+				<o:messages for="checkoutUserForm:state" var="message">
+					<p>#{message.summary}</p>
+				</o:messages>
 			</div>
 
 			<div>
 				<label for="address_city">Cidade</label> <input type="text"
 					jsf:value="#{checkoutBean.address.city}" jsf:id="city" />
-				<h:message for="city" />
+				<o:messages for="checkoutUserForm:city" var="message">
+					<p>#{message.summary}</p>
+				</o:messages>
 			</div>
 
 			<div>
 				<label for="address_desc">Complemento</label> <input type="text"
 					jsf:value="#{checkoutBean.address.addressDesc}" jsf:id="address" />
-				<h:message for="address" />
+				<o:messages for="checkoutUserForm:address" var="message">
+					<p>#{message.summary}</p>
+				</o:messages>
 			</div>
 
 			<div>
 				<label for="address_ZIPCODE">CEP</label> <input type="text"
 					jsf:value="#{checkoutBean.address.zipCode}" jsf:id="zipcode" />
-				<h:message for="zipcode" />
+				<o:messages for="checkoutUserForm:zipcode" var="message">
+					<p>#{message.summary}</p>
+				</o:messages>
 			</div>
 
 			<div>
 				<label for="address_phone">Telefone</label> <input type="text"
 					jsf:value="#{checkoutBean.address.phone}" jsf:id="phone" />
-				<h:message for="phone" />				
+				<o:messages for="checkoutUserForm:phone" var="message">
+					<p>#{message.summary}</p>
+				</o:messages>
 			</div>
 		</div>
 

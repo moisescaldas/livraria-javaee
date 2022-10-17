@@ -14,6 +14,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
+import org.livraria.domain.validation.groups.BuyerGroup;
+
 @Entity
 @Table(name = "SystemUsers")
 public class SystemUser {
@@ -22,19 +24,24 @@ public class SystemUser {
 	@Column(name = "ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@NotBlank
+	
 	@Email
+	@NotBlank
 	@Column(name = "EMAIl", unique = true)
 	private String email;
-	@NotBlank
+
 	@Column(name = "FIRST_NAME")
+	@NotBlank(groups = BuyerGroup.class)
 	private String name;
-	@NotBlank
+	
 	@Column(name = "LAST_NAME")
+	@NotBlank(groups = BuyerGroup.class)
 	private String lastName;
-	@NotBlank
+	
 	@Column(name = "SOCIAL_ID", unique = true)
+	@NotBlank(groups = BuyerGroup.class)
 	private String socialId;
+	
 	@Column(name = "USER_PASSWORD")
 	private String password;
 

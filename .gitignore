@@ -1,6 +1,6 @@
 /target/
-**/.settings
-**/.classpath
-**/.factorypath
-**/.project
-**/.tern-project
+.settings
+.classpath
+.factorypath
+.project
+.tern-project

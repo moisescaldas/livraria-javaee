@@ -5,7 +5,9 @@ import java.util.List;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
+import javax.ws.rs.Path;
 
+import org.livraria.domain.beans.ShoppingCart;
 import org.livraria.domain.dao.CountryDAO;
 import org.livraria.domain.dao.SystemUserDAO;
 import org.livraria.domain.entity.Address;
@@ -20,6 +22,7 @@ import static org.livraria.util.Constantes.URL_REDIRECT_INDEX;;
 
 
 @Model
+@Path("payment")
 public class CheckoutBean {
 	private static final Logger LOGGER = LoggerFactory.getLogger(CheckoutBean.class);
 
@@ -28,8 +31,8 @@ public class CheckoutBean {
 	private static final String CLIENT_MESSAGE_ID_COUNTRY = "checkoutUserForm:countryPick";
 
 	private static final String CLIENT_MESSAGE_EMAIL = "E-MAIL já cadastrado";
-	private static final String CLIENT_MESSAGE_SOCIAL_ID = "Deve ser selecionado seu país de origem";
-	private static final String CLIENT_MESSAGE_COUNTRY = "CPF já cadastrado";
+	private static final String CLIENT_MESSAGE_SOCIAL_ID = "CPF já cadastrado";
+	private static final String CLIENT_MESSAGE_COUNTRY = "Deve ser selecionado seu país de origem";
 	
 	private SystemUser systemUser;
 	private Address address;
@@ -38,12 +41,14 @@ public class CheckoutBean {
 	private CountryDAO countryDAO;
 	private SystemUserDAO systemUserDAO;
 
+	private ShoppingCart shoppingCart;
 	private MessageHelper messageHelper;
-
+	
 	@Inject
-	public CheckoutBean(CountryDAO countryDAO, SystemUserDAO systemUserDAO, MessageHelper messageHelper) {
+	public CheckoutBean(CountryDAO countryDAO, SystemUserDAO systemUserDAO, MessageHelper messageHelper, ShoppingCart shoppingCart) {
 		this.countryDAO = countryDAO;
 		this.systemUserDAO = systemUserDAO;
+		this.shoppingCart = shoppingCart;
 		this.messageHelper = messageHelper;
 
 		this.systemUser = new SystemUser();
