@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -23,6 +24,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Length;
 
 @Entity
+@Cacheable
 public class Book {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -59,6 +61,14 @@ public class Book {
 	private Calendar releaseDate;
 
 	private String coverUrl;
+	
+	public Book() {}
+	
+	public Book(Long id, String title, String coverUrl) {
+		this.id = id;
+		this.title = title;
+		this.coverUrl = coverUrl;
+	}
 	
 	/*
 	 * Getters e Setters
