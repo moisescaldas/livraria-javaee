@@ -3,34 +3,39 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:o="http://omnifaces.org/ui">
 
 <h:head>
 	<title>Livraria</title>
 </h:head>
 
 <h:body>
-	<ul>
-		<ui:repeat var="book" value="#{homeBean.lastReleases()}">
-			<li>
-				<a href="#{request.contextPath}/site/product.xhtml?id=#{book.id}">
-					<img src="#{book.coverUrl}" width="170px" height="240px" title="#{book.title}" />
-				</a>
-				<h2>#{book.title}</h2>
-			</li>
-		</ui:repeat>
-	</ul>
-	<br></br>
+	<o:cache>
 		<ul>
-		<ui:repeat var="book" value="#{homeBean.olderBooks()}">
-			<li>
-				<a href="#{request.contextPath}/site/product.xhtml?id=#{book.id}">
-					<img src="#{book.coverUrl}" width="143px" height="202px" title="#{book.title}" />
+			<ui:repeat var="book" value="#{homeBean.lastReleases()}">
+				<li><a
+					href="#{request.contextPath}/site/product.xhtml?id=#{book.id}">
+						<img src="#{book.coverUrl}" width="170px" height="240px"
+						title="#{book.title}" />
 				</a>
-				<h2>#{book.title}</h2>
-			</li>
-		</ui:repeat>
-	</ul>	
+					<h2>#{book.title}</h2></li>
+			</ui:repeat>
+		</ul>
+		<br />
+	</o:cache>
+	<o:cache>
+		<ul>
+			<ui:repeat var="book" value="#{homeBean.olderBooks()}">
+				<li><a
+					href="#{request.contextPath}/site/product.xhtml?id=#{book.id}">
+						<img src="#{book.coverUrl}" width="143px" height="202px"
+						title="#{book.title}" />
+				</a>
+					<h2>#{book.title}</h2></li>
+			</ui:repeat>
+		</ul>
+	</o:cache>
 </h:body>
 
 </html>
