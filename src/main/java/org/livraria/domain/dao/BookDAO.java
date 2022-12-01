@@ -13,7 +13,8 @@ public class BookDAO {
 	private static final String QUERY_FIND_ALL = "select b from Book b";
 	private static final String QUERY_FIND_BY_ID = "select b from Book b where b.id = :id";
 	private static final String QUERY_SELECIONAR_HOME_PAGE = "select new Book(b.id, b.title, b.coverUrl) from Book b where b.releaseDate <= now() order by b.id desc";
-
+	private static final String QUERY_SELECIONAR_SERVICO ="SELECT b FROM Book b WHERE b.releaseDate <= now() ORDER by b.id DESC";
+	
 	@PersistenceContext
 	private EntityManager manager;
 
@@ -37,6 +38,10 @@ public class BookDAO {
 				.setMaxResults(3).getResultList();
 	}
 
+	public List<Book> lastReleasesServico() {
+		return manager.createQuery(QUERY_SELECIONAR_SERVICO, Book.class).setMaxResults(3).getResultList();
+	}
+	
 	public List<Book> olderBooks() {
 		return manager.createQuery(QUERY_SELECIONAR_HOME_PAGE, Book.class).setMaxResults(20)
 				.setHint(QueryHints.HINT_CACHEABLE, true).getResultList();
