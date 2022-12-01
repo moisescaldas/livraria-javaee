@@ -1,4 +1,4 @@
-package org.livraria.wsclient.dto;
+package org.livraria.ws.client.dto;
 
 import java.math.BigDecimal;
 

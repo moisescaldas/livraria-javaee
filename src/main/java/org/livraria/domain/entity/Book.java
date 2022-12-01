@@ -20,6 +20,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -29,6 +31,7 @@ import org.hibernate.validator.constraints.Length;
 @Entity
 @Cacheable
 @XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Book {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -75,6 +78,7 @@ public class Book {
 		this.title = title;
 		this.coverUrl = coverUrl;
 	}
+
 	
 	/*
 	 * Getters e Setters
@@ -134,12 +138,13 @@ public class Book {
 	public void setReleaseDate(Calendar releaseDate) {
 		this.releaseDate = releaseDate;
 	}
-	
+
 	public String getCoverUrl() {
 		return coverUrl;
 	}
-	
+
 	public void setCoverUrl(String coverUrl) {
 		this.coverUrl = coverUrl;
 	}
+	
 }

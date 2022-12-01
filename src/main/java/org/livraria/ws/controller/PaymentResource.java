@@ -18,7 +18,7 @@ import javax.ws.rs.core.UriBuilder;
 
 import org.livraria.domain.dao.CheckoutDAO;
 import org.livraria.domain.entity.Checkout;
-import org.livraria.wsclient.client.PaymentClient;
+import org.livraria.ws.client.client.PaymentClient;
 
 @Path("payment")
 public class PaymentResource {
