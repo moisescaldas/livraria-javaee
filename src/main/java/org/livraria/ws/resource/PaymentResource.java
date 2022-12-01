@@ -1,4 +1,4 @@
-package org.livraria.ws.controller;
+package org.livraria.ws.resource;
 
 import java.math.BigDecimal;
 import java.net.URI;
@@ -18,6 +18,7 @@ import javax.ws.rs.core.UriBuilder;
 
 import org.livraria.domain.dao.CheckoutDAO;
 import org.livraria.domain.entity.Checkout;
+import org.livraria.infra.MailSender;
 import org.livraria.ws.client.client.PaymentClient;
 
 @Path("payment")
@@ -26,6 +27,8 @@ public class PaymentResource {
 	private CheckoutDAO checkoutDAO;
 	private PaymentClient paymentClient;
 
+	private MailSender sender;
+	
 	@Context
 	private HttpServletRequest req;
 
@@ -36,9 +39,10 @@ public class PaymentResource {
 	}
 
 	@Inject
-	public PaymentResource(CheckoutDAO checkoutDAO, PaymentClient paymentClient) {
+	public PaymentResource(CheckoutDAO checkoutDAO, PaymentClient paymentClient, MailSender sender) {
 		this.checkoutDAO = checkoutDAO;
 		this.paymentClient = paymentClient;
+		this.sender = sender;
 	}
 
 	@POST
@@ -54,6 +58,9 @@ public class PaymentResource {
 				try {
 					paymentClient.pay(total);
 					ar.resume(Response.seeOther(uri).build());
+					String mailBody = String.format("Nova compra. Seu código de acompanhamento é %s.", checkout.getUuid());
+					sender.send("sesiom.br@gmail.com", checkout.getBuyer().getEmail(), "Nova compra", mailBody);
+					
 				} catch (RuntimeException ex) {
 					ar.resume(ex);
 				}
