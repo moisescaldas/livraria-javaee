@@ -21,7 +21,7 @@ public class BookDetailBean {
 	}
 	
 	public void loadBook() {
-		book = dao.findById(id);
+		book = dao.findBookById(id);
 	}
 	
 	/*

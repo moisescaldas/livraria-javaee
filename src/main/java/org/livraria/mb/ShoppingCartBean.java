@@ -22,12 +22,12 @@ public class ShoppingCartBean {
 	}
 	
 	public String add(Long id) {
-		shoppingCart.add(new ShoppingItem(dao.findById(id)));
+		shoppingCart.add(new ShoppingItem(dao.findBookById(id)));
 		return "/site/carrinho?faces-redirect=true";
 	}
 	
 	public String remove(Long id) {
-		shoppingCart.remove(new ShoppingItem(dao.findById(id)));
+		shoppingCart.remove(new ShoppingItem(dao.findBookById(id)));
 		return "/site/carrinho?faces-redirect=true";
 	}
 	

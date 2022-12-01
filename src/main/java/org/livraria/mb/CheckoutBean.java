@@ -46,6 +46,8 @@ public class CheckoutBean {
 	private ShoppingCart shoppingCart;
 	private MessageHelper messageHelper;
 	
+	public CheckoutBean() {}
+	
 	@Inject
 	public CheckoutBean(CountryDAO countryDAO, SystemUserDAO systemUserDAO, MessageHelper messageHelper,
 			ShoppingCart shoppingCart, CheckoutDAO checkoutDAO, FacesContext facesContext) {
