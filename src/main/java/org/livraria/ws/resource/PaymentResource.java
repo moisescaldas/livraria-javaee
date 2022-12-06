@@ -59,7 +59,6 @@ public class PaymentResource {
 					paymentClient.pay(total);
 					ar.resume(Response.seeOther(uri).build());
 					String mailBody = String.format("Nova compra. Seu código de acompanhamento é %s.", checkout.getUuid());
-					sender.send("sesiom.br@gmail.com", checkout.getBuyer().getEmail(), "Nova compra", mailBody);
 					
 				} catch (RuntimeException ex) {
 					ar.resume(ex);
