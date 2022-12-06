@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.security.GeneralSecurityException;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Singleton;
@@ -46,13 +46,18 @@ public class GmailAPIClient {
 	/**
 	 * Diretory to store authorization tokens
 	 */
-	private static final String TOKENS_DIRECTORY_PATH = "tokens";
+	private static final String TOKENS_DIRECTORY_PATH = "/tokens";
 
-	private static final List<String> SCOPES = Collections.singletonList(GmailScopes.GMAIL_LABELS);
+	private static final List<String> SCOPES = new ArrayList<>();
 	private static final String CREDENTIALS_FILE_PATH = "/credentials.json";
 
 	private final Gmail client;
-
+	
+	static {
+		SCOPES.add(GmailScopes.GMAIL_LABELS);
+		SCOPES.add(GmailScopes.GMAIL_COMPOSE);
+	}
+	
 	public GmailAPIClient() throws GeneralSecurityException, IOException {
 		LOGGER.info("Inicindo a criação do cliente Gmail");
 		final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
