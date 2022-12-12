@@ -1,4 +1,4 @@
-package org.livraria.ejb;
+package org.livraria.infra;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -8,8 +8,7 @@ import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ejb.Singleton;
-import javax.ejb.Startup;
+import javax.inject.Singleton;
 
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
@@ -24,6 +23,7 @@ import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.gmail.Gmail;
 import com.google.api.services.gmail.GmailScopes;
 
+import org.omnifaces.cdi.Startup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

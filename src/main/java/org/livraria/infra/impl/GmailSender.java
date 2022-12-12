@@ -14,7 +14,7 @@ import javax.mail.internet.MimeMessage;
 import com.google.api.services.gmail.model.Message;
 
 import org.apache.commons.codec.binary.Base64;
-import org.livraria.ejb.GmailAPIClient;
+import org.livraria.infra.GmailAPIClient;
 import org.livraria.infra.MailSender;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
