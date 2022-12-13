@@ -1,4 +1,4 @@
-package org.livraria.ws.config;
+package org.livraria.config;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
